@@ -1,4 +1,4 @@
-package com.example.commonutil.logutil;
+package com.example.common.util.logutil;
 
 import android.content.Context;
 import android.os.Environment;
@@ -55,7 +55,7 @@ public class LogcatSave {
         File file = new File(PATH_LOGCAT);
         if (!file.exists()) {
             //创建log保存目录
-            boolean isTrue = file.mkdirs();
+            boolean isSuccess = file.mkdirs();
         }
     }
 
