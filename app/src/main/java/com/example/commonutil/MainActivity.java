@@ -1,21 +1,21 @@
 package com.example.commonutil;
 
+import android.Manifest;
+import android.app.Application;
+import android.content.pm.PackageManager;
+import android.content.res.AssetManager;
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-import android.app.Application;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Bundle;
-import android.util.Log;
-
 import com.example.common.util.Logger;
-import com.example.common.util.NetWorkUtil;
+import com.example.common.util.XMLParser;
 import com.example.common.util.logutil.LogcatSave;
 
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,18 +26,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_main);
 //        checkPermission();
 //        Logger.i(TAG, "onCreate test logcat save");
-        String s1 = NetWorkUtil.getIP(this, 1);
-        String s2 = NetWorkUtil.getIP(this, 2);
-        Logger.i(TAG, "s1:" + s1 + ",s2:" + s2);
-        String s3 = NetWorkUtil.getLastIpPart(this, s2);
-        Logger.i(TAG, "s3:" + s3);
-        Logger.i(TAG, "onCreate getNetWorkName:" + NetWorkUtil.getNetWorkName(this));
-        Logger.i(TAG, "onCreate isWifiApOpen:" + NetWorkUtil.isWifiApOpen(this));
-        Logger.i(TAG, "onCreate " + this.getApplication());
-        Logger.i(TAG, "onCreate " + getCurrentApplication());
+//        String s1 = NetWorkUtil.getIP(this, 1);
+//        String s2 = NetWorkUtil.getIP(this, 2);
+//        Logger.i(TAG, "s1:" + s1 + ",s2:" + s2);
+//        String s3 = NetWorkUtil.getLastIpPart(this, s2);
+//        Logger.i(TAG, "s3:" + s3);
+//        Logger.i(TAG, "onCreate getNetWorkName:" + NetWorkUtil.getNetWorkName(this));
+//        Logger.i(TAG, "onCreate isWifiApOpen:" + NetWorkUtil.isWifiApOpen(this));
+
+//        Logger.i(TAG, "onCreate " + this.getApplication());
+//        Logger.i(TAG, "onCreate " + getCurrentApplication());
+
+//        Logger.i(TAG, "onCreate wifi Direct:" + getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT));
+//        Logger.i(TAG, "TEST MD5:" + StringByteUtil.getMd5("test"));
+
+        parseXMLTest();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG,"onResume");
     }
 
     private void checkPermission() {
@@ -101,6 +114,33 @@ public class MainActivity extends AppCompatActivity {
             throw new IllegalStateException("Can not access Application context by magic code, boom!", e);
         }
         return CURRENT;
+    }
+
+    //test xml parse
+    private void parseXMLTest() {
+        Log.i(TAG, "parseXMLTest");
+        InputStream inputStream = null;
+        try {
+            inputStream = this.getApplicationContext().getClass().getResourceAsStream("/assets/" + "config.xml");
+        } catch (Exception e) {
+            Log.w(TAG, e);
+            inputStream = null;
+        }
+        if(inputStream == null){
+            AssetManager am = this.getAssets();
+            try {
+                inputStream = am.open("config.xml");
+            } catch (Exception e) {
+                Log.w(TAG, e);
+                inputStream = null;
+            }
+        }
+        Log.i(TAG, "parseXMLTest inputStream:" + inputStream);
+        if (inputStream != null) {
+            XMLParser xmlParser = new XMLParser();
+            xmlParser.parser(inputStream,"DefaultModel");
+            xmlParser.getXMLString();
+        }
     }
 
 }
