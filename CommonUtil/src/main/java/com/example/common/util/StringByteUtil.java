@@ -1,5 +1,8 @@
 package com.example.common.util;
 
+import android.util.Log;
+
+import java.security.MessageDigest;
 import java.util.Arrays;
 
 public class StringByteUtil {
@@ -41,6 +44,7 @@ public class StringByteUtil {
         }
         return data;
     }
+
     //byte数组拼接
     public static byte[] ConcatArrays(byte[] first, byte[]... rest) {
         int totalLength = first.length;
@@ -54,6 +58,32 @@ public class StringByteUtil {
             offset += array.length;
         }
         return result;
+    }
+
+
+    public static String getMd5(String str) {
+        String result = "";
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            byte[] bytes = md5.digest(str.getBytes());
+
+            for (byte b : bytes) {
+                String temp = Integer.toHexString(b & 0xff);
+                if (temp.length() == 1) {
+                    temp = "0" + temp;
+                }
+                result += temp;
+            }
+        } catch (Exception e) {
+            System.out.println("getMd5 exception:" + e);
+        }
+        System.out.println("getMd5 result:" + result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("MD5:" + getMd5("hi3716ccfa00c6b337802286963545409569112087ff8debc11e9bd71506b4b26c05a1569564157074"));
+        System.out.println("MD5:" + getMd5("123cc:fa:00:c6:b3:37802286963545409569112087ff8debc11e9bd71506b4b26c05a1569564157074"));
     }
 
 }

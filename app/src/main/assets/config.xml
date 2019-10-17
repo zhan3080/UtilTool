@@ -1,0 +1,25 @@
+<config>
+
+    <!-- youku-->
+    <APP_KEY_youku>
+        <FEATURE_STICKY_SERVICE>true</FEATURE_STICKY_SERVICE>
+    </APP_KEY_youku>
+
+    <!-- tcl com.hpplay.allcast -->
+    <APP_KEY_10105>
+        <FEATURE_SIGNAL_SOURCE_CHANGE>true</FEATURE_SIGNAL_SOURCE_CHANGE>
+    </APP_KEY_10105>
+    <!-- tcl com.tcl.MultiScreenInteraction_TV -->
+    <APP_KEY_10614>
+        <FEATURE_SIGNAL_SOURCE_CHANGE>true</FEATURE_SIGNAL_SOURCE_CHANGE>
+    </APP_KEY_10614>
+
+    <!--SDK通用配置项-->
+    <DefaultModel>
+        <FEATURE_STICKY_SERVICE>false</FEATURE_STICKY_SERVICE><!---->
+        <FEATURE_SIGNAL_SOURCE_CHANGE_HENANYOUXIAN>false
+        </FEATURE_SIGNAL_SOURCE_CHANGE_HENANYOUXIAN><!--河南有线信源切换处理  true：需要等系统信源切换回复  false：不需要处理信源相关的问题-->
+    </DefaultModel>
+
+
+</config>
