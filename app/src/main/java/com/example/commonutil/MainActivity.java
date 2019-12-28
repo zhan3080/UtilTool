@@ -2,6 +2,7 @@ package com.example.commonutil;
 
 import android.Manifest;
 import android.app.Application;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.common.util.Logger;
 import com.example.common.util.XMLParser;
+import com.example.common.util.logutil.LogService;
 import com.example.common.util.logutil.LogcatSave;
 
 import java.io.InputStream;
@@ -28,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
         setContentView(R.layout.activity_main);
+        startActivity(new Intent(MainActivity.this, MirrorActivity.class));
+//        startService(new Intent(MainActivity.this, LogService.class));
+//        UsbFile usbFile = new UsbFile(this);
+//        usbFile.getPublicPath();
 //        checkPermission();
 //        Logger.i(TAG, "onCreate test logcat save");
 //        String s1 = NetWorkUtil.getIP(this, 1);
@@ -44,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
 //        Logger.i(TAG, "onCreate wifi Direct:" + getPackageManager().hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT));
 //        Logger.i(TAG, "TEST MD5:" + StringByteUtil.getMd5("test"));
 
-        parseXMLTest();
+//        parseXMLTest();
     }
 
     @Override
@@ -66,6 +72,18 @@ public class MainActivity extends AppCompatActivity {
         }
         // test logSave
         LogcatSave.getInstance(this).start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG,"onStop");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG,"onPause");
     }
 
     public void onRequestPermissionsResult(
@@ -93,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.i(TAG,"onDestroy");
         // test logSave
         LogcatSave.getInstance(this).stop();
     }

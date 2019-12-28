@@ -82,8 +82,10 @@ public class StringByteUtil {
     }
 
     public static void main(String[] args) {
-        System.out.println("MD5:" + getMd5("hi3716ccfa00c6b337802286963545409569112087ff8debc11e9bd71506b4b26c05a1569564157074"));
-        System.out.println("MD5:" + getMd5("123cc:fa:00:c6:b3:37802286963545409569112087ff8debc11e9bd71506b4b26c05a1569564157074"));
+        //System.out.println("MD5:" + getMd5("hi3716ccfa00c6b337802286963545409569112087ff8debc11e9bd71506b4b26c05a1569564157074"));
+        //System.out.println("MD5:" + getMd5("123cc:fa:00:c6:b3:37802286963545409569112087ff8debc11e9bd71506b4b26c05a1569564157074"));
+        System.out.println("test result:" + 0 % 2);
+        System.out.println("test result:" + 95 % 2);
     }
 
 }
